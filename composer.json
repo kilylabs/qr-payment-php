@@ -1,0 +1,35 @@
+{
+  "name":         "kilylabs/qr-payment-php",
+  "description":  "Генерация QR-кодов для оплаты на базе ГОСТ Р 56042-2014 для PHP",
+  "keywords":     [
+    "qr",
+    "payment",
+    "gost",
+    "56042"
+  ],
+  "type":         "library",
+  "license":      "MIT",
+  "autoload":     {
+    "psr-4": {
+      "Kily\\Payment\\QR\\": "src/QR"
+    }
+  },
+  "autoload-dev": {
+    "psr-4": {
+      "Kily\\Payment\\QR\\Tests\\": "tests/QR/Tests"
+    }
+  },
+  "authors":      [
+    {
+      "name":  "Alexander Bogdanov",
+      "email": "ab@dev.kily.ru"
+    }
+  ],
+  "require":      {
+    "guzzlehttp/guzzle": "^7.2",
+    "chillerlan/php-qrcode": "^4.3"
+  },
+  "require-dev": {
+    "phpunit/phpunit": "^8.1"
+  }
+}
