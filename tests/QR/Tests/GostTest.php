@@ -280,8 +280,8 @@ class GostTest extends TestCase
     public function testIsValid(): void
     {
         $this->gost->setThrowExceptions(false);
-        $this->assertTrue($this->gost->isValid("Sum","100"));
-        $this->assertFalse($this->gost->isValid("Sum","aaa"));
+        $this->assertTrue($this->gost->isValid("Sum", "100"));
+        $this->assertFalse($this->gost->isValid("Sum", "aaa"));
     }
 
     /**

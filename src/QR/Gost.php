@@ -125,7 +125,7 @@ class Gost implements \ArrayAccess
 
     public function __set($name, $value)
     {
-        if($this->isValidKey($name)) {
+        if ($this->isValidKey($name)) {
             $this->isValid($name, $value);
             $this->_attrs[$name] = $value;
         }
@@ -175,7 +175,7 @@ class Gost implements \ArrayAccess
                         continue;
                     }
                     $found = true;
-                    if(false === $value) {
+                    if (false === $value) {
                         // we don't need to check value
                         break 2;
                     }
@@ -207,7 +207,7 @@ class Gost implements \ArrayAccess
                     if (is_array($v)) {
                         if (!in_array($aval, $v)) {
                             if ($this->_throwExceptions) {
-                                if($name && (false !== $value) && !$this->_validateOnSet) {
+                                if ($name && (false !== $value) && !$this->_validateOnSet) {
                                     return false;
                                 }
                                 throw new Exception($settype.' attr "'.$real_k.'" is not in list: '.implode(',', $v));
@@ -217,7 +217,7 @@ class Gost implements \ArrayAccess
                     } else {
                         if (!preg_match('/'.$v.'/ui', $aval)) {
                             if ($this->_throwExceptions) {
-                                if($name && (false !== $value) && !$this->_validateOnSet) {
+                                if ($name && (false !== $value) && !$this->_validateOnSet) {
                                     return false;
                                 }
                                 throw new Exception($settype.' attr "'.$real_k.'" does not match RegExp: '.$v);
@@ -262,21 +262,25 @@ class Gost implements \ArrayAccess
         $this->_validateOnSet = $value;
     }
 
-    public function listRequired() {
+    public function listRequired()
+    {
         return $this->listAttrs(static::REQUIRED);
     }
 
-    public function listAdditional() {
+    public function listAdditional()
+    {
         return $this->listAttrs(static::ADDITIONAL);
     }
 
-    public function listOther() {
+    public function listOther()
+    {
         return $this->listAttrs(static::OTHER);
     }
 
-    protected function listAttrs($set) {
+    protected function listAttrs($set)
+    {
         $tmp = [];
-        foreach($set as $k=>$v) {
+        foreach ($set as $k=>$v) {
             $real_k = is_numeric($k) ? $v : $k;
             $tmp[] = $real_k;
         }
