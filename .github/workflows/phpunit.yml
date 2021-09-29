@@ -7,6 +7,12 @@ jobs:
         runs-on: ubuntu-latest
 
         steps:
+            - name: Setup PHP with gd and imagick
+              uses: shivammathur/setup-php@v2
+              with:
+                  php-version: '7.4'
+                  extensions: imagick, gd
+
             - name: Checking out repo
               uses: actions/checkout@v2
 
@@ -14,11 +20,7 @@ jobs:
               run: echo '${{ secrets.COMPOSER_AUTH_JSON }}' > $GITHUB_WORKSPACE/auth.json
 
             - name: Installing composer with deps
-              uses: php-actions/composer@v6
-              with:
-                  php_extensions: gd
-                  php_version: 7.4
-                  version: 2
+              uses: "ramsey/composer-install@v1"
 
             - name: Running PHPUNIT
               uses: php-actions/phpunit@v3
