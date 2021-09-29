@@ -138,6 +138,7 @@ class Gost implements \ArrayAccess
         } else {
             $options = new QROptions([
                 'imageBase64'=>false,
+                'imageTransparent'=>false,
             ]);
         }
         $qrcode = new QRCode($options);
