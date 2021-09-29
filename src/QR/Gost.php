@@ -74,6 +74,7 @@ class Gost implements \ArrayAccess
 
     protected $_attrs = [];
     protected $_throwExceptions = true;
+    protected $_validateOnSet = false;
 
     public function __construct($name = null, $pacc = null, $bankname = null, $bic = null, $cacc = null)
     {
@@ -201,6 +202,9 @@ class Gost implements \ArrayAccess
                     if (is_array($v)) {
                         if (!in_array($aval, $v)) {
                             if ($this->_throwExceptions) {
+                                if($name && (false !== $value) && !$this->_validateOnSet) {
+                                    return false;
+                                }
                                 throw new Exception($settype.' attr "'.$real_k.'" is not in list: '.implode(',', $v));
                             }
                             return false;
@@ -208,6 +212,9 @@ class Gost implements \ArrayAccess
                     } else {
                         if (!preg_match('/'.$v.'/ui', $aval)) {
                             if ($this->_throwExceptions) {
+                                if($name && (false !== $value) && !$this->_validateOnSet) {
+                                    return false;
+                                }
                                 throw new Exception($settype.' attr "'.$real_k.'" does not match RegExp: '.$v);
                             }
                             return false;
@@ -243,5 +250,10 @@ class Gost implements \ArrayAccess
     public function setThrowExceptions($value)
     {
         $this->_throwExceptions = $value;
+    }
+
+    public function setValidateOnSet($value)
+    {
+        $this->_validateOnSet = $value;
     }
 }
