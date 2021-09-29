@@ -52,6 +52,7 @@ try {
         'imageBase64'=>true,
     ]);
     // выводит изображение в base64 (inline)
+    // больше опций здесь: (https://github.com/chillerlan/php-qrcode/wiki/QROptions)
     $g->render("qr.png");
     // сохраняет QR-код в файл
 } catch(QRException $e) {
