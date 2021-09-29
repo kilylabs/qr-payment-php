@@ -23,10 +23,7 @@ jobs:
               uses: "ramsey/composer-install@v1"
 
             - name: Running PHPUNIT
-              uses: php-actions/phpunit@v3
-              with:
-                  php_version: 7.4
-                  version: 8.5
+              run: ./vendor/bin/phpunit 
 
             - name: Remove auth.json file
               run: rm -f $GITHUB_WORKSPACE/auth.json
