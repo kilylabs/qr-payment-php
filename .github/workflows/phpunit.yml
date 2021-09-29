@@ -13,11 +13,14 @@ jobs:
           run: echo '${{ secrets.COMPOSER_AUTH_JSON }}' > $GITHUB_WORKSPACE/auth.json
 
         - uses: php-actions/composer@v6 # or alternative dependency management
+          name: Installing composer with deps
           with:
+              php_extensions: redis exif
               php_version: 7.4
               version: 2
 
         - uses: php-actions/phpunit@v3
+          name: Running PHPUNIT
 
         - name: Remove auth.json file
           run: rm -f $GITHUB_WORKSPACE/auth.json
