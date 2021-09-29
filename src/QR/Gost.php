@@ -125,7 +125,8 @@ class Gost implements \ArrayAccess
 
     public function __set($name, $value)
     {
-        if ($this->isValid($name, $value)) {
+        if($this->isValidKey($name)) {
+            $this->isValid($name, $value);
             $this->_attrs[$name] = $value;
         }
     }
@@ -174,6 +175,10 @@ class Gost implements \ArrayAccess
                         continue;
                     }
                     $found = true;
+                    if(false === $value) {
+                        // we don't need to check value
+                        break 2;
+                    }
                 }
                 if (!isset($this->_attrs[$real_k])) {
                     if ($value !== false) {
@@ -255,5 +260,26 @@ class Gost implements \ArrayAccess
     public function setValidateOnSet($value)
     {
         $this->_validateOnSet = $value;
+    }
+
+    public function listRequired() {
+        return $this->listAttrs(static::REQUIRED);
+    }
+
+    public function listAdditional() {
+        return $this->listAttrs(static::ADDITIONAL);
+    }
+
+    public function listOther() {
+        return $this->listAttrs(static::OTHER);
+    }
+
+    protected function listAttrs($set) {
+        $tmp = [];
+        foreach($set as $k=>$v) {
+            $real_k = is_numeric($k) ? $v : $k;
+            $tmp[] = $real_k;
+        }
+        return $tmp;
     }
 }

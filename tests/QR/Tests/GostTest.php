@@ -208,6 +208,7 @@ class GostTest extends TestCase
     {
         $this->expectException(Exception::class);
         $this->gost->setThrowExceptions(true);
+        $this->gost->setValidateOnSet(false);
 
         //test exception on REQUIRED attrs
         $this->gost->Name = 'OLOLO';
@@ -225,6 +226,7 @@ class GostTest extends TestCase
     {
         $this->expectException(Exception::class);
         $this->gost->setThrowExceptions(true);
+        $this->gost->setValidateOnSet(false);
 
         //test exception on RegEx attrs
         $this->gost->Name = 'OLOLO';
@@ -243,6 +245,7 @@ class GostTest extends TestCase
     {
         $this->expectException(Exception::class);
         $this->gost->setThrowExceptions(true);
+        $this->gost->setValidateOnSet(false);
 
         //test exception on RegEx attrs
         $this->gost->Name = 'OLOLO';
@@ -271,21 +274,65 @@ class GostTest extends TestCase
         $this->assertTrue($this->gost->validate());
     }
 
+    /**
+     * @covers Kily\Payment\QR\Gost::isValid
+     */
     public function testIsValid(): void
     {
-        /** @todo This test is incomplete. */
-        $this->markTestIncomplete();
+        $this->gost->setThrowExceptions(false);
+        $this->assertTrue($this->gost->isValid("Sum","100"));
+        $this->assertFalse($this->gost->isValid("Sum","aaa"));
     }
 
+    /**
+     * @covers Kily\Payment\QR\Gost::isValidKey
+     */
     public function testIsValidKey(): void
     {
-        /** @todo This test is incomplete. */
-        $this->markTestIncomplete();
+        $this->gost->setThrowExceptions(false);
+        $this->assertTrue($this->gost->isValidKey("Sum"));
+        $this->assertFalse($this->gost->isValidKey("Ololo"));
     }
 
-    public function testSetThrowExceptions(): void
+    /**
+     * @covers Kily\Payment\QR\Gost::setThrowExceptions
+     */
+    public function testSetThrowExceptions1(): void
     {
-        /** @todo This test is incomplete. */
-        $this->markTestIncomplete();
+        $this->expectException(Exception::class);
+        $this->gost->setThrowExceptions(true);
+        $this->gost->Ololo = 100500;
+    }
+
+    /**
+     * @covers Kily\Payment\QR\Gost::setThrowExceptions
+     */
+    public function testSetThrowExceptions2(): void
+    {
+        $this->gost->setThrowExceptions(false);
+        $this->gost->Ololo = 100500;
+        $this->assertTrue(true);
+    }
+
+    /**
+     * @covers Kily\Payment\QR\Gost::setValidateOnSet
+     */
+    public function testSetValidateOnSet1(): void
+    {
+        $this->expectException(Exception::class);
+        $this->gost->setThrowExceptions(true);
+        $this->gost->setValidateOnSet(true);
+        $this->gost->Sum = 'asd';
+    }
+
+    /**
+     * @covers Kily\Payment\QR\Gost::setValidateOnSet
+     */
+    public function testSetValidateOnSet2(): void
+    {
+        $this->gost->setThrowExceptions(true);
+        $this->gost->setValidateOnSet(true);
+        $this->gost->Sum = '100500';
+        $this->assertTrue(true);
     }
 }
