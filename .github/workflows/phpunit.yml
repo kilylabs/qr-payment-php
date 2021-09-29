@@ -1,0 +1,23 @@
+name: PHPUNIT
+
+on: [push]
+
+jobs:
+    phpunit:
+        runs-on: ubuntu-latest
+
+        steps:
+        - uses: actions/checkout@v2
+
+        - name: Add HTTP basic auth credentials
+          run: echo '${{ secrets.COMPOSER_AUTH_JSON }}' > $GITHUB_WORKSPACE/auth.json
+
+        - uses: php-actions/composer@v6 # or alternative dependency management
+          with:
+              php_version: 7.4
+              version: 2
+
+        - uses: pxgamer/phpunit-action@master
+
+        - name: Remove auth.json file
+          run: rm -f $GITHUB_WORKSPACE/auth.json
