@@ -17,7 +17,7 @@ jobs:
               php_version: 7.4
               version: 2
 
-        - uses: pxgamer/phpunit-action@master
+        - uses: php-actions/phpunit@v3
 
         - name: Remove auth.json file
           run: rm -f $GITHUB_WORKSPACE/auth.json
