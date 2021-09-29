@@ -176,13 +176,13 @@ class GostTest extends TestCase
         $this->gost->BankName = 'ОАО КБ АВАНГАРД';
         $this->gost->BIC = 123123;
         $this->gost->CorrespAcc = '12312412';
-        $this->assertEquals(md5($this->gost->render()), '20ff40e6b32ed5f63f20065c3b0668de');
+        $this->assertEquals(md5($this->gost->render()), 'f0ddf90ac9aac92499d5741bd3f75a1c');
 
         $tmp = tempnam(sys_get_temp_dir(), 'kilygost_');
         $this->gost->render($tmp);
         $contents = file_get_contents($tmp);
         unlink($tmp);
-        $this->assertEquals(md5($contents), '20ff40e6b32ed5f63f20065c3b0668de');
+        $this->assertEquals(md5($contents), 'f0ddf90ac9aac92499d5741bd3f75a1c');
 
         $contents = $this->gost->render(false, ['imageBase64'=>true]);
         $this->assertEquals(md5($contents), '9940ab68a3829ec710446d8fccd7f457');
