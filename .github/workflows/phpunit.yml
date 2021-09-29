@@ -1,6 +1,6 @@
 name: PHPUNIT
 
-on: [push]
+on: [push, pull_request]
 
 jobs:
     phpunit:
@@ -21,6 +21,9 @@ jobs:
 
         - uses: php-actions/phpunit@v3
           name: Running PHPUNIT
+          with:
+              php_version: 7.4
+              version: 8.5
 
         - name: Remove auth.json file
           run: rm -f $GITHUB_WORKSPACE/auth.json
