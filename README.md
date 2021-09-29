@@ -29,9 +29,11 @@ $g->setThrowExceptions(true); // Бросать исключения (повед
 $g->setValidateOnSet(false); // Отключить валидацию при уcтановке значения (поведение по-умолчанию)
 
 var_dump($g->listRequired());
-// outputs list of required attrs
+// выводится список обязательных атрибутов
 //var_dump($g->listAdditional());
+// выводится список дополнительных атрибутов
 //var_dump($g->listOther());
+// выводится список других атрибутов
 
 $g->Name = 'ИП Богданов Александр Сергеевич';
 $g->PersonalAcc = '40802810700020000317';
@@ -43,15 +45,15 @@ try {
     $g->validate();
 
     echo $g->generate();
-    // outputs: ST00012|Name=ИП Богданов Александр Сергеевич|PersonalAcc=40802810700020000317|BankName=ОАО АКБ «АВАНГАРД»|BIC=044525201|CorrespAcc=30101810000000000201
+    // выводит: ST00012|Name=ИП Богданов Александр Сергеевич|PersonalAcc=40802810700020000317|BankName=ОАО АКБ «АВАНГАРД»|BIC=044525201|CorrespAcc=30101810000000000201
     echo $g->render();
-    // outputs QR-image in binary format (PNG)
+    // выводит QR-код в бинарном формате (PNG)
     echo $g->render(false,[
         'imageBase64'=>true,
     ]);
-    // outputs inline base64 image
+    // выводит изображение в base64 (inline)
     $g->render("qr.png");
-    // saves QR-image to file
+    // сохраняет QR-код в файл
 } catch(QRException $e) {
     // something went wrong
     throw $e;
