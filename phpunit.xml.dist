@@ -7,12 +7,6 @@
     convertNoticesToExceptions="true"
     convertWarningsToExceptions="true"
     testSuiteLoaderFile="phpunit/src/Runner/StandardTestSuiteLoader.php">
-    <php>
-        <!--<server name="URL_ODATA_1C" value="https://YOUR_ODATA_HOST/YOUR_CONF/odata/standard.odata/" />-->
-        <!--<server name="LOGIN" value="YOUR_LOGIN" />-->
-        <!--<server name="PASSWORD" value="YOUR_PASSWORD" />-->
-        <!--<server name="ALLOW_UNSAFE_OPERATIONS" value="true" />-->
-    </php>
     <testsuites>
         <testsuite name="main">
             <directory>tests/QR/Tests</directory>
@@ -23,6 +17,4 @@
             <directory suffix=".php">./src</directory>
         </whitelist>
     </filter>
-
-
 </phpunit>
