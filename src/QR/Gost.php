@@ -26,7 +26,7 @@ class Gost implements \ArrayAccess
         'PayerINN'=>'^[0-9]{0,12}$',
         'DrawerStatus'=>'.{0,2}',
         'KPP'=>'^[0-9]{0,9}$',
-        'СВС'=>'^[0-9]{0,20}$',
+        'CBC'=>'^[0-9]{0,20}$',
         'OKTMO'=>'.{0,11}',
         'PaytReason'=>'.{0,2}',
         'TaxPeriod'=>'.{0,10}',
@@ -41,30 +41,30 @@ class Gost implements \ArrayAccess
         'MiddleName',
         'PayerAddress',
         'PersonalAccount',
-        'Docldx',
+        'DocIdx',
         'PensAcc',
         'Contract',
         'PersAcc',
         'Flat',
         'Phone',
-        'PayerldType',
-        'PayerldNum',
+        'PayerIdType',
+        'PayerIdNum',
         'ChildFio',
         'BirthDate',
         'PaymTerm',
         'PaymPeriod',
         'Category',
         'ServiceName',
-        'Counterld',
+        'CounterId',
         'CounterVal',
-        'Quittld',
+        'QuittId',
         'QuittDate',
         'InstNum',
         'ClassNum',
         'SpecFio',
         'AddAmount',
-        'Ruleld',
-        'Execld',
+        'RuleId',
+        'ExecId',
         'RegType',
         'UIN',
         'TechCode'=>[
@@ -130,6 +130,12 @@ class Gost implements \ArrayAccess
             $this->_attrs[$name] = $value;
         }
     }
+
+    public function __isset($name)
+    {
+        return isset($this->_attrs[$name]);
+    }
+
 
     public function render($to_file = false, $options = null)
     {
